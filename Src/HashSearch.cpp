@@ -2918,9 +2918,11 @@ void CHashSearch::PrintM8(vector<CHitUnit>& v, ostream& of)
 		{
 			if (c.dEValue < 0.01)
 			{
-				of << setprecision(1) << setiosflags(ios::scientific) << setiosflags(ios::fixed)
+                                // Note that with C++11 fixed + scientific => hexfloat (make sure we have just either of them)
+                                of << setprecision(2) << resetiosflags(ios::fixed) << setiosflags(ios::scientific)
+
 					<< "\t"	<< c.dEValue;
-				of << resetiosflags(ios::scientific);
+                                of << resetiosflags(ios::scientific) << setiosflags(ios::fixed);
 			}
 			else if (c.dEValue < 10.0)
 			{
